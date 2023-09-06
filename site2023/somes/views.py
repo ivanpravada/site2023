@@ -1,10 +1,17 @@
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect, HttpResponsePermanentRedirect
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.template.loader import render_to_string
 
 
 def index(request):
-    return HttpResponse("Somes site")
+    # t = render_to_string('somes/index.html')
+    # return HttpResponse(t)
+    return render(request, 'somes/index.html')
+
+
+def about(request):
+    return render(request, 'somes/about.html')
 
 
 def categories(request, cat_id):
