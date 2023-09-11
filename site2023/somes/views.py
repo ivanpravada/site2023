@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.template.loader import render_to_string
+from django.template.defaultfilters import slugify
 
 
 menu = ["About", "Add article", "Feedback", "Log in"]
@@ -17,13 +18,14 @@ def index(request):
     # t = render_to_string('somes/index.html')
     # return HttpResponse(t)
     data = {
-        'title': 'Main page',
+        'title': 'main page',
         'menu': menu,
         'float': 22.34,
         'lst': [1, 2, 'ab', True],
         'set': {2, 5, 'mm'},
         'dict': {'key1': 'value2', 'key2': 'value2'},
-        'obj': MyClass(10, 20)
+        'obj': MyClass(10, 20),
+        'url': slugify("The Main Page"),
     }
     return render(request, 'somes/index.html', context=data)
 
