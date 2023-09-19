@@ -8,24 +8,18 @@ from django.template.defaultfilters import slugify
 menu = ["About", "Add article", "Feedback", "Log in"]
 
 
-class MyClass:
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
+data_db = [
+    {'id': 1, 'title': 'title_1', 'content': 'some data 1', 'is_published': True},
+    {'id': 2, 'title': 'title_2', 'content': 'some data 2', 'is_published': False},
+    {'id': 3, 'title': 'title_3', 'content': 'some data 3', 'is_published': True},
+]
 
 
 def index(request):
-    # t = render_to_string('somes/index.html')
-    # return HttpResponse(t)
     data = {
-        'title': 'main page',
+        'title': 'Main page',
         'menu': menu,
-        'float': 22.34,
-        'lst': [1, 2, 'ab', True],
-        'set': {2, 5, 'mm'},
-        'dict': {'key1': 'value2', 'key2': 'value2'},
-        'obj': MyClass(10, 20),
-        'url': slugify("The Main Page"),
+        'posts': data_db,
     }
     return render(request, 'somes/index.html', context=data)
 
