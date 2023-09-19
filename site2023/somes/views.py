@@ -1,11 +1,13 @@
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect, HttpResponsePermanentRedirect
-from django.shortcuts import redirect, render
-from django.urls import reverse
-from django.template.loader import render_to_string
-from django.template.defaultfilters import slugify
+from django.shortcuts import render
 
 
-menu = ["About", "Add article", "Feedback", "Log in"]
+menu = [
+    {'title': 'About', 'url_name': 'about'},
+    {'title': 'Add article', 'url_name': 'addpage'},
+    {'title': 'Feedback', 'url_name': 'contact'},
+    {'title': 'Log in', 'url_name': 'login'},
+]
 
 
 data_db = [
@@ -28,21 +30,20 @@ def about(request):
     return render(request, 'somes/about.html', {'title': 'About'})
 
 
-def categories(request, cat_id):
-    return HttpResponse(f"<h1>Categories by id</h1><p>id: {cat_id}</p>")
+def show_post(request, post_id):
+    return HttpResponse(f"Article id = {post_id}")
 
 
-def categories_by_slug(request, cat_slug):
-    if request.POST:
-        print(request.POST)
-    return HttpResponse(f"<h1>Categories by slug</h1><p>id: {cat_slug}</p>")
+def addpage(request):
+    return HttpResponse("Add article")
 
 
-def archive(request, year):
-    if year > 2023:
-        uri = reverse('cats', args=('music', ))
-        return HttpResponsePermanentRedirect(uri)
-    return HttpResponse(f"<h1>Archive by year</h1><p>{year}</p>")
+def contact(request):
+    return HttpResponse("Feedback")
+
+
+def login(request):
+    return HttpResponse("Log in")
 
 
 def page_not_found(request, exception):
