@@ -27,7 +27,7 @@ def index(request):
 
 
 def about(request):
-    return render(request, 'somes/about.html', {'title': 'About'})
+    return render(request, 'somes/about.html', {'title': 'About', 'menu': menu})
 
 
 def show_post(request, post_id):
